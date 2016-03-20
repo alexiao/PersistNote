@@ -3,8 +3,8 @@ package com.dv.persistnote.framework.core;
 import android.content.Context;
 import android.os.Message;
 
-import com.dv.persistnote.framework.ScreenManager;
-import com.dv.persistnote.framework.UICallBacks;
+import com.dv.persistnote.framework.ui.ScreenManager;
+import com.dv.persistnote.framework.ui.UICallBacks;
 
 import java.util.ArrayList;
 

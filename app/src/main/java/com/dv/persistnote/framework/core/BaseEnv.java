@@ -2,7 +2,7 @@ package com.dv.persistnote.framework.core;
 
 import android.content.Context;
 
-import com.dv.persistnote.framework.ScreenManager;
+import com.dv.persistnote.framework.ui.ScreenManager;
 
 
 public class BaseEnv {

@@ -6,16 +6,15 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dv.persistnote.R;
-import com.dv.persistnote.base.util.HardwareUtil;
-import com.dv.persistnote.framework.AbstractScreen;
+import com.dv.persistnote.framework.ActionId;
+import com.dv.persistnote.framework.ui.AbstractScreen;
 import com.dv.persistnote.framework.FontManager;
-import com.dv.persistnote.framework.UICallBacks;
+import com.dv.persistnote.framework.ui.UICallBacks;
 
 
 /**
@@ -92,6 +91,7 @@ public class WelcomeScreen extends AbstractScreen implements View.OnClickListene
             Toast.makeText(getContext(), "点击注册", Toast.LENGTH_SHORT).show();
         } if (view == mLoginButton) {
             Toast.makeText(getContext(), "点击登录", Toast.LENGTH_SHORT).show();
+            mCallBacks.handleAction(ActionId.OnLoginClick, null, null);
         }
     }
 }

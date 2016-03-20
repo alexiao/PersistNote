@@ -4,11 +4,18 @@ import android.os.Message;
 import android.util.SparseArray;
 import android.view.KeyEvent;
 
-import com.dv.persistnote.framework.AbstractScreen;
-import com.dv.persistnote.framework.AbstractTabContentView;
+import com.dv.persistnote.base.network.GitService;
+import com.dv.persistnote.base.network.Gitmodel;
+import com.dv.persistnote.framework.ui.AbstractScreen;
+import com.dv.persistnote.framework.ui.AbstractTabContentView;
 import com.dv.persistnote.framework.core.MsgDef;
 import com.dv.persistnote.framework.core.AbstractController;
 import com.dv.persistnote.framework.core.BaseEnv;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by Hang on 2016/3/13.
@@ -25,10 +32,12 @@ public class RootController extends AbstractController{
             mRootScreen = new RootScreen(mContext, this);
             mWindowMgr.createWindowStack(mRootScreen);
 
-            //未登录时显示登陆窗口
-            AbstractScreen screen = new WelcomeScreen(mContext,this);
-            mWindowMgr.pushScreen(screen, false);
+            checkLoginState();
         }
+    }
+
+    private void checkLoginState() {
+        mDispatcher.sendMessage(MsgDef.MSG_SHOW_WELCOME_SCREEN);
     }
 
     public RootController(BaseEnv baseEnv) {
@@ -43,5 +52,32 @@ public class RootController extends AbstractController{
     @Override
     public boolean onWindowKeyEvent(AbstractScreen target, int keyCode, KeyEvent event) {
         return false;
+    }
+
+    @Override
+    public boolean handleAction(int actionId, Object arg, Object result) {
+        testPost();
+        return false;
+    }
+
+    private void testPost() {
+        String API = "https://api.github.com";
+
+        RestAdapter restAdapter = new RestAdapter.Builder().
+                setLogLevel(RestAdapter.LogLevel.FULL).setEndpoint(API).build();
+
+        GitService git = restAdapter.create(GitService.class);
+
+        git.getFeed("cmcchemc", new Callback<Gitmodel>() {
+            @Override
+            public void success(Gitmodel gitmodel, Response response) {
+                mRootScreen.setCheckInText(gitmodel.getLocation());
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+            }
+        });
+
     }
 }

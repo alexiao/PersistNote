@@ -17,7 +17,7 @@ public class ControllerRegister{
     public void registerControllers() {
 
         registerRootController();
-
+        registerAccountController();
     }
 
     public void registerRootController(){
@@ -26,6 +26,15 @@ public class ControllerRegister{
         int[] messageIDs = new int[]{
                 MsgDef.MSG_INIT_ROOTSCREEN,
                 };
+        mControllerCenter.addPolicy(MessagePolicy.create(controllerID, messageIDs));
+    }
+
+    public void registerAccountController(){
+        int controllerID = ControllerID.ACCOUNT_CONTROLLER;
+
+        int[] messageIDs = new int[]{
+                MsgDef.MSG_SHOW_WELCOME_SCREEN,
+        };
         mControllerCenter.addPolicy(MessagePolicy.create(controllerID, messageIDs));
     }
 

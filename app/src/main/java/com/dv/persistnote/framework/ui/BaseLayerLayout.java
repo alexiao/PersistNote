@@ -1,4 +1,4 @@
-package com.dv.persistnote.framework;
+package com.dv.persistnote.framework.ui;
 
 import java.util.ArrayList;
 import java.util.List;
