@@ -20,7 +20,7 @@ import com.dv.persistnote.framework.core.NotificationCenter;
 import com.dv.persistnote.framework.core.NotificationDef;
 
 
-public abstract class AbstractScreen extends FrameLayout implements INotify {
+public abstract class AbstractScreen extends RelativeLayout implements INotify {
     
     public static final String TAG = "AbstractWindow";
     public static final boolean DEBUG = false;
@@ -71,8 +71,6 @@ public abstract class AbstractScreen extends FrameLayout implements INotify {
     public static final LayoutParams WINDOW_LP = new LayoutParams(
             LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
     
-    private ViewGroup mBaseLayer;
-
 
     protected UICallBacks mCallBacks;
     protected Rect mWindowRect;
@@ -84,7 +82,6 @@ public abstract class AbstractScreen extends FrameLayout implements INotify {
         mWindowRect = new Rect();
         setWillNotDraw(false);
         registerNotification();
-        initLayer();
     }
     
     /****************************** Class Public methods - Begin ******************************/
@@ -97,10 +94,6 @@ public abstract class AbstractScreen extends FrameLayout implements INotify {
     public void unRegisterNotification() {
         NotificationCenter.getGlobalInstance().unregister(this, NotificationDef.N_THEME_CHANGE);
         NotificationCenter.getGlobalInstance().unregister(this, NotificationDef.N_WALLPAPER_CHANGE);
-    }
-    
-    public ViewGroup getBaseLayer() {
-        return mBaseLayer;
     }
     
     /**
@@ -246,16 +239,6 @@ public abstract class AbstractScreen extends FrameLayout implements INotify {
         mCallBacks.onWindowStateChange(this, stateFlag);
     }
 
-    protected void initLayer() {
-        mBaseLayer = onCreateBaseLayer();
-        addViewInLayout(mBaseLayer, 0, WINDOW_LP);
-        
-    }
-
-    protected ViewGroup onCreateBaseLayer() {
-        return createDefaultBaseLayer();
-    }
-
     protected RelativeLayout onCreateButtonLayer() {
         return createDefaultLayer();
     }
@@ -274,17 +257,6 @@ public abstract class AbstractScreen extends FrameLayout implements INotify {
 
     protected RelativeLayout createDefaultLayer() {
         return new RelativeLayout(getContext());
-    }
-    
-    protected BaseLayerLayout createDefaultBaseLayer() {
-        return new BaseLayerLayout(getContext());
-    }
-    
-    protected BaseLayerLayout.LayoutParams getBaseLayerLP() {
-        BaseLayerLayout.LayoutParams lp = new BaseLayerLayout.LayoutParams(
-                BaseLayerLayout.LayoutParams.MATCH_PARENT, 
-                BaseLayerLayout.LayoutParams.MATCH_PARENT);
-        return lp;
     }
     
     /****************************** Class Protected methods - End ******************************/

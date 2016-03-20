@@ -46,8 +46,8 @@ public class WelcomeScreen extends AbstractScreen implements View.OnClickListene
         mCenterText.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.common_text_size_20));
         mCenterText.setTypeface(FontManager.getInstance().getDefaultTypeface());
 
-        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-        lp.gravity = Gravity.CENTER_HORIZONTAL;
+        LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+        lp.addRule(CENTER_HORIZONTAL);
         lp.topMargin = (int) getResources().getDimension(R.dimen.welcome_icon_top_margin);
         addView(mCenterText, lp);
 
@@ -61,8 +61,9 @@ public class WelcomeScreen extends AbstractScreen implements View.OnClickListene
         container.addView(mLoginButton);
 
 
-        lp = new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
-        lp.gravity = Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM;
+        lp = new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
+        lp.addRule(CENTER_HORIZONTAL);
+        lp.addRule(ALIGN_PARENT_BOTTOM);
         lp.bottomMargin = (int) getResources().getDimension(R.dimen.welcome_icon_top_margin);
         lp.leftMargin = lp.rightMargin = (int) getResources().getDimension(R.dimen.action_button_margin);
         addView(container, lp);
@@ -90,7 +91,6 @@ public class WelcomeScreen extends AbstractScreen implements View.OnClickListene
         if(view == mRegisterButton) {
             Toast.makeText(getContext(), "点击注册", Toast.LENGTH_SHORT).show();
         } if (view == mLoginButton) {
-            Toast.makeText(getContext(), "点击登录", Toast.LENGTH_SHORT).show();
             mCallBacks.handleAction(ActionId.OnLoginClick, null, null);
         }
     }

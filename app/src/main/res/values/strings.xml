@@ -4,4 +4,8 @@
     <string name="slogen">继续跑，迎着冷眼和嘲笑</string>
     <string name="register">注册</string>
     <string name="login">登录</string>
+
+    <string name="preset_fitness">健身</string>
+    <string name="preset_reading">读书</string>
+    <string name="preset_breakfast">吃早餐</string>
 </resources>
