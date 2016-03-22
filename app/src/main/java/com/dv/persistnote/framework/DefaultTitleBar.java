@@ -20,13 +20,11 @@ public class DefaultTitleBar extends RelativeLayout implements View.OnClickListe
     private ImageView mBackButton;
     private TextView mTitleText;
 
-//    private ImageView mAction
-
     public DefaultTitleBar(Context context) {
         super(context);
 
         mBackButton = new ImageView(getContext());
-        mBackButton.setImageDrawable(ResTools.getDrawable(R.drawable.title_back));
+        mBackButton.setImageDrawable(ResTools.getDrawable(R.drawable.back));
         mBackButton.setOnClickListener(this);
 
         LayoutParams lp = new LayoutParams(ResTools.getDimenInt(R.dimen.common_icon_width), ResTools.getDimenInt(R.dimen.common_icon_width));
@@ -35,13 +33,15 @@ public class DefaultTitleBar extends RelativeLayout implements View.OnClickListe
         addView(mBackButton, lp);
 
         mTitleText = new TextView(getContext());
-        mTitleText.setTextColor(ResTools.getColor(R.color.default_white));
+        mTitleText.setTextColor(ResTools.getColor(R.color.default_black));
         mTitleText.setTextSize(TypedValue.COMPLEX_UNIT_PX, ResTools.getDimenInt(R.dimen.title_bar_text));
         lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         lp.addRule(CENTER_IN_PARENT);
         addView(mTitleText, lp);
 
-        setBackgroundColor(ResTools.getColor(R.color.light_main_color));
+        setBackgroundColor(ResTools.getColor(R.color.default_white));
+        int padding = ResTools.getDimenInt(R.dimen.common_margin_16);
+        setPadding(padding, 0, padding, 0);
     }
 
     public void setTitle(String title) {

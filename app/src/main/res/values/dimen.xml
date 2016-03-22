@@ -16,6 +16,12 @@
     <dimen name="common_text_size_24">24dp</dimen>
     <dimen name="common_text_size_30">30dp</dimen>
 
+    <dimen name="common_margin_16">16dp</dimen>
+
     <!--具体业务标注-->
+    <dimen name="habit_icon_width">40dp</dimen>
+    <dimen name="habit_item_height">80dp</dimen>
+    <dimen name="habit_item_margin_top">16dp</dimen>
+
 </resources>
 

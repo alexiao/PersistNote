@@ -4,13 +4,19 @@ import android.os.Message;
 import android.util.SparseArray;
 import android.view.KeyEvent;
 
-import com.dv.persistnote.base.network.GitService;
-import com.dv.persistnote.base.network.Gitmodel;
-import com.dv.persistnote.framework.ui.AbstractScreen;
-import com.dv.persistnote.framework.ui.AbstractTabContentView;
-import com.dv.persistnote.framework.core.MsgDef;
+import com.dv.persistnote.base.network.TestServiceInterface;
+import com.dv.persistnote.base.network.bean.Result;
+import com.dv.persistnote.base.network.bean.TransResult;
+import com.dv.persistnote.business.account.AccountModel;
 import com.dv.persistnote.framework.core.AbstractController;
 import com.dv.persistnote.framework.core.BaseEnv;
+import com.dv.persistnote.framework.core.MsgDef;
+import com.dv.persistnote.framework.ui.AbstractScreen;
+import com.dv.persistnote.framework.ui.AbstractTabContentView;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.HashMap;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -26,6 +32,9 @@ public class RootController extends AbstractController{
     private RootScreen mRootScreen;
     private SparseArray<AbstractTabContentView> mTabViews = new SparseArray<AbstractTabContentView>();
 
+    public RootController(BaseEnv baseEnv) {
+        super(baseEnv);
+    }
     @Override
     public void handleMessage(Message msg) {
         if(msg.what == MsgDef.MSG_INIT_ROOTSCREEN) {
@@ -40,10 +49,6 @@ public class RootController extends AbstractController{
         mDispatcher.sendMessage(MsgDef.MSG_SHOW_WELCOME_SCREEN);
     }
 
-    public RootController(BaseEnv baseEnv) {
-        super(baseEnv);
-    }
-
     @Override
     public void onWindowStateChange(AbstractScreen target, byte stateFlag) {
 
@@ -56,28 +61,8 @@ public class RootController extends AbstractController{
 
     @Override
     public boolean handleAction(int actionId, Object arg, Object result) {
-        testPost();
         return false;
     }
 
-    private void testPost() {
-        String API = "https://api.github.com";
 
-        RestAdapter restAdapter = new RestAdapter.Builder().
-                setLogLevel(RestAdapter.LogLevel.FULL).setEndpoint(API).build();
-
-        GitService git = restAdapter.create(GitService.class);
-
-        git.getFeed("cmcchemc", new Callback<Gitmodel>() {
-            @Override
-            public void success(Gitmodel gitmodel, Response response) {
-                mRootScreen.setCheckInText(gitmodel.getLocation());
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-            }
-        });
-
-    }
 }
