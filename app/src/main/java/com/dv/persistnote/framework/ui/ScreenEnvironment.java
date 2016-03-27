@@ -1,4 +1,4 @@
-package com.dv.persistnote.framework;
+package com.dv.persistnote.framework.ui;
 
 import android.app.Activity;
 import android.content.Context;

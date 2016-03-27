@@ -10,4 +10,6 @@ public class MsgDef {
     }
 
     public static final int MSG_INIT_ROOTSCREEN = generateID();
+
+    public static final int MSG_SHOW_WELCOME_SCREEN = generateID();
 }

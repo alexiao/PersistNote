@@ -1,4 +1,4 @@
-package com.dv.persistnote.framework;
+package com.dv.persistnote.framework.ui;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,6 +8,7 @@ import android.os.Looper;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.dv.persistnote.framework.HandlEx;
 import com.dv.persistnote.framework.core.INotify;
 import com.dv.persistnote.framework.core.Notification;
 

@@ -3,7 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="default_black">#FF4a4a4a</color>
-    <color name="light_main_color">#FF1a8b7a</color>
+
+    <color name="default_white">#ffffff</color>
+    <color name="default_grey">#F2F5FA</color>
+    <color name="default_black">#4a4a4a</color>
+    <color name="light_main_color">#1a8b7a</color>
 
 </resources>
